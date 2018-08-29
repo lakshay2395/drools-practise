@@ -1,0 +1,31 @@
+package rules
+
+import com.practise.drools.model.Person;
+
+rule "Greetings for morning"
+
+    when
+        person: Person(time >= 0,time < 12)
+    then
+        person.setMessage("Good Morning "+person.getName()+" !!");
+
+end
+
+rule "Greetings for afternoon"
+    
+    when
+        //conditions
+    then
+        //actions
+
+end
+
+rule "Greetings for night"
+    
+    when
+        //conditions
+    then
+        //actions
+
+end
+

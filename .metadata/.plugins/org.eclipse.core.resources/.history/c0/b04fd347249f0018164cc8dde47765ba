@@ -1,0 +1,14 @@
+package com.practise.drools.service;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.practise.drools.model.Product;
+
+@Component
+public class ProductService {
+
+	public Product getProductDiscount(@RequestBody Product product) {
+		return null;
+	}
+}

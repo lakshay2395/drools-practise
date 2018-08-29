@@ -1,0 +1,25 @@
+package com.practise.drools.listener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.drools.core.WorkingMemory;
+import org.drools.core.event.AfterActivationFiredEvent;
+import org.drools.core.event.DefaultAgendaEventListener;
+import org.kie.api.definition.rule.Rule;
+
+public class TracingEmployeeEventListener extends DefaultAgendaEventListener{
+	
+	private List<String> activations = new ArrayList<String>();
+	
+	@Override
+	public void afterActivationFired(AfterActivationFiredEvent event,final WorkingMemory workingMemory) {
+	    Rule rule = event.getActivation().getRule();
+	    String ruleName = rule.getName();
+	    activationList.add(ruleName);
+	    System.out.println("Rule fired: " + ruleName);
+	}
+
+	
+
+}

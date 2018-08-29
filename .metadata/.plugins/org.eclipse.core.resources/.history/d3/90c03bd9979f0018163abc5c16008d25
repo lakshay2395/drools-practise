@@ -1,0 +1,88 @@
+package rules
+
+import com.practise.drools.model.Employee;
+import com.practise.drools.model.Department;
+import com.practise.drools.model.ITManager;
+import com.practise.drools.model.ITEmployee;
+
+rule "Cross - Reference Example"
+salience -1
+    when
+        emp : Employee()
+        dept : Department()
+    then
+        System.out.println("emp = "+emp+" , dept = "+dept);
+
+end
+
+rule "Filter Example"
+
+    when
+    	dept : Department(name == "IT")
+        emp : Employee(department == dept)
+    then
+    	System.out.println("\nFilter Example");
+        System.out.println("emp = "+emp+" , dept = "+dept);
+
+end
+
+rule "All Employees To With CS Department"
+
+    when
+        emp : Employee(department.name == "CS")
+    then
+    	System.out.println("\nAll Employees To With CS Department");
+        System.out.println("emp = "+emp);
+
+end
+
+rule "Give laptop to IT managers"
+
+    when
+        emp : Employee(department.name == "IT",manager == true)
+    then
+    	System.out.println("\nGive laptop to IT managers");
+        System.out.println("emp = "+emp);
+
+end
+
+rule "IT managers - Inference Example"
+	when
+		emp : Employee(department.name == "IT",manager == true)
+	then
+		insert(new ITManager(emp));
+end
+
+rule "Give laptops to IT Managers"
+	when
+		emp : Employee()
+		itManager : ITManager(employee == emp)
+	then
+		System.out.println("\nGive laptops to IT managers");
+		System.out.println("emp = "+emp);
+end
+
+rule "IT Employees - Inference Example"
+	when
+		emp : Employee(department.name == "IT" , manager == false)
+	then
+		insertLogical(new ITEmployee(emp));
+end
+
+rule "Give desktops to IT Employees"
+	when
+		emp : Employee()
+		itEmployee : ITEmployee(employee == emp)
+	then
+		System.out.println("\nGive desktops to IT employees");
+		System.out.println("emp = "+emp);
+end
+
+rule "Promote Employee"
+	when
+		emp : Employee(name == "Harshita")
+	then
+		System.out.println("\nPromote Employee");
+		emp.setManager(true);
+		update(emp);
+end

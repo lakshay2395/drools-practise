@@ -1,0 +1,40 @@
+//created on: Aug 13, 2018
+package rules
+
+import com.sample.models.Product;
+
+rule "Offer for Gold"
+salience 3
+    when
+        productObject: Product(type == "gold")
+    then
+        productObject.setDiscount(5);
+
+end
+
+rule "Offer for Gold on sale"
+salience 2	
+	when 
+		productObject: Product(type == "gold" && event == "sale")
+	then
+		productObject.setDiscount(productObject.getDiscount()+5);
+		
+end
+
+
+rule "Offer for diamond"
+    when
+        productObject: Product(type == "diamond")
+    then
+        productObject.setDiscount(15);
+
+end
+
+rule "Offer for platinum customer"
+salience 1
+no-loop true
+	when
+		productObject: Product(buyer == "platinum")
+	then
+		update(productObject);	
+end

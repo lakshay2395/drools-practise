@@ -1,0 +1,45 @@
+//created on: Aug 13, 2018
+package rules
+
+import com.sample.models.Product;
+
+
+
+//declare any global variables here
+
+
+
+
+rule "Offer for Gold"
+salience 3
+    when
+        productObject: Product(type == "gold")
+    then
+        productObject.setDiscount(5);
+
+end
+
+rule "Offer for Gold on sale"
+salience 2	
+	when 
+		productObject: Product(type == "gold" && event == "sale")
+	then
+		productObject.setDiscount(productObject.getDiscount()+5);
+		
+end
+
+
+rule "Offer for diamond"
+    //include attributes such as "salience" here...
+    when
+        productObject: Product(type == "diamond")
+    then
+        productObject.setDiscount(15);
+
+end
+
+rule "Offer for platinum customer"
+	when
+		productObject: Product(buyer == "platinum")
+	then
+		productObject.set

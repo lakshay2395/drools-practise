@@ -1,0 +1,20 @@
+package rules
+
+rule "Cross - Reference Example"
+
+    when
+        emp : Employee()
+        dept : Department()
+    then
+        System.out.println("emp = "+emp+" , dept = "+dept);
+
+end
+
+//rule "Your Second Rule"
+  
+  //  when
+        //conditions
+   // then
+        //actions
+
+//end
